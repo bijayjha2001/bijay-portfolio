@@ -252,61 +252,12 @@ Join us and showcase your talent on the grand Durga Puja stage.
 
 <div class="gallery">
 
-<img src="https://images.unsplash.com/photo-1606298855672-3efb63017be8?q=80&w=800"
-onclick="openImg(this.src)">
+<img src="https://images.unsplash.com/photo-1606298855672-3efb63017be8?q=80&w=800">
 
-<img src="https://images.unsplash.com/photo-1631387736926-1f4d26e9dd98?q=80&w=800"
-onclick="openImg(this.src)">
+<img src="https://images.unsplash.com/photo-1631387736926-1f4d26e9dd98?q=80&w=800">
 
-<img src="https://images.unsplash.com/photo-1605538883669-8256a57f8f6e?q=80&w=800"
-onclick="openImg(this.src)">
+<img src="https://images.unsplash.com/photo-1605538883669-8256a57f8f6e?q=80&w=800">
 
-  <div id="lightbox" onclick="closeImg()">
-<img id="lightbox-img">
-    #lightbox{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.9);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-
-#lightbox img{
-max-width:90%;
-max-height:80%;
-border-radius:10px;
-transform:scale(0.8);
-animation:zoom 0.3s forwards;
-}
-
-@keyframes zoom{
-to{transform:scale(1);}
-}
-
-.gallery img{
-cursor:pointer;
-transition:0.3s;
-}
-
-.gallery img:hover{
-transform:scale(1.05);
-}
-    <script>
-function openImg(src){
-document.getElementById("lightbox").style.display = "flex";
-document.getElementById("lightbox-img").src = src;
-}
-
-function closeImg(){
-document.getElementById("lightbox").style.display = "none";
-}
-</script>
-    
 </div>
 </div>
 </div>
@@ -339,7 +290,7 @@ document.getElementById("lightbox").style.display = "none";
 <h3>🏵️ Shorbo Jonin Durga Puja Samiti</h3>
 <p>Durga Puja Dance Competition 2026</p>
 </footer>
-
+  
 <script>
 const targetDate = new Date("October 2, 2026 16:00:00").getTime();
 
@@ -355,19 +306,6 @@ document.getElementById("countdown").innerHTML =
 "⏳ " + days + " Days " + hours + " Hours " + minutes + " Minutes Left";
 },1000);
 </script>
-</body>
-</html>
-
-<script>
-const targetDate = new Date("October 2, 2026 16:00:00").getTime();
-
-setInterval(() => {
-...
-},1000);
-</script>
-
-</body>
-</html>
 <script>
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxiMcSjceRX6gFBOMzAwqCsHgieARjh3llwX_0Hozhyt0n9H9pNyNcPljiZL86AV1Ra/exec";
@@ -377,63 +315,26 @@ document.getElementById("registrationForm").addEventListener("submit", async fun
 e.preventDefault();
 
 const submitBtn = document.querySelector("button[type='submit']");
-submitBtn.innerText = "Uploading...";
+submitBtn.innerText = "Submitting...";
 submitBtn.disabled = true;
 
 try{
 
-const fileInput = document.getElementById("file");
-let fileData = null;
-
-if(fileInput.files.length > 0){
-
-const file = fileInput.files[0];
-
-const base64 = await new Promise((resolve,reject)=>{
-
-const reader = new FileReader();
-
-reader.onload = () => resolve(reader.result.split(",")[1]);
-
-reader.onerror = reject;
-
-reader.readAsDataURL(file);
-
-});
-
-fileData = {
-name:file.name,
-type:file.type,
-data:base64
-};
-
-}
-
 const payload = {
-name:document.getElementById("name").value,
-mobile:document.getElementById("mobile").value,
-age:document.getElementById("age").value,
-category:document.getElementById("category").value,
-file:fileData
+name: document.getElementById("name").value,
+mobile: document.getElementById("mobile").value,
+age: document.getElementById("age").value,
+category: document.getElementById("category").value
 };
 
-const response = await fetch(SCRIPT_URL,{
+await fetch(SCRIPT_URL,{
 method:"POST",
 body:JSON.stringify(payload)
 });
 
-const result = await response.json();
-
-if(result.result === "success"){
-
 alert("🎉 Registration Submitted Successfully!");
+
 document.getElementById("registrationForm").reset();
-
-}else{
-
-alert("❌ Error: " + result.message);
-
-}
 
 }catch(err){
 
@@ -448,3 +349,6 @@ submitBtn.disabled = false;
 });
 
 </script>
+
+</body>
+</html>
